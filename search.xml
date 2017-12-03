@@ -1,68 +1,363 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[Python笔记2017.11.26]]></title>
-    <url>%2F2017%2F11%2F26%2FPython%E7%AC%94%E8%AE%B011.26%2F</url>
-    <content type="text"><![CDATA[Python笔记转换&gt;&gt;&gt;ord(&#39;A&#39;)————————&gt;65 &gt;&gt;&gt;chr(65)————————&gt;A &gt;&gt;&gt;bin(十进制数)——————&gt;二进制数 &gt;&gt;&gt;hex(十进制数)——————&gt;十六进制数 模块导入及函数使用 模块 是指一个可以交互使用，或者从另一Python 程序访问的代码段。只要导入了一个模块，就可以引用它的任何公共的函数、类或属性。模块可以通过这种方法来使用其它模块的功能。 方法一：import 模块名 用import语句导入模块，就在当前的名称空间(namespace)建立了一个到该模块的引用.这种引用必须使用全称，也就是说，当使用在被导入模块中定义的函数时，必须包含模块的名字。所以不能只使用 funcname，而应该使用 modname.funcname 方法二:from 模块名 import 函数名 或者 from modname import * 与第1种方法的区别：funcname 被直接导入到本地名字空间去了，所以它可以直接使用，而不需要加上模块名的限定 ,而* 表示，该模块的所有公共对象(public objects)都被导入到 当前的名称空间，也就是任何只要不是以”_”开始的东西都会被导入。 modname没有被定义，所以modname.funcname这种方式不起作用。并且，如果funcname如果已经被定义，它会被新版本（该导入模块中的版本）所替代。如果funcname被改成指向其他对象，modname不能不会觉察到。 建议:1)如果你要经常访问模块的属性和方法，且不想一遍又一遍地敲入模块名，使用 from module import 2)如果你想要有选择地导入某些属性和方法，而不想要其它的，使用 from module import 3)如果模块包含的属性和方法与你的某个模块同名，你必须使用import module来避免名字冲突 4)尽量少用 from module import * ，因为判定一个特殊的函数或属性是从哪来的有些困难，并且会造成调试和重构都更困难。 方法三：内建函数__import__() 除了前面两种使用import关键字的方法以外，我们还可以使用内建函数 import() 来导入module。两者的区别是，import 后面跟的必须是一个类型(type)，而import() 的参数是一个字符串，这个字符串可能来自配置文件，也可能是某个表达式计算结果。例如mymodule = import (’module_name’) 附注:1)模块的内容都放在一个模块文件中，如 mymodule 的内容应该放在PYTHONPATH 目录下的一个mymodule.py中，C实现的除外2)包可以将几个模块名称空间组织起来, 如A.b 就表示在包A中的一个子模块b可以单独导入某一个子模块，如Python文档中给出的例子import sound.effects.echo这样必须使用全称对里面的对象进行引用，如sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)还可以使用下面的语句来加载echo子模块from Sound.Effects import echo它在没有包前缀的情况下也可以使用， 所以它可以如下方式调用：echo.echofilter(input, output, delay=0.7, atten=4)不主张从一个包或模块中用import * 导入所有模块，因为这样的通常会导致可读性很差。from Package import specific_submodule的用法并没有错，实际上这还是推荐的用法，除非导入的模块需要使用其它包中的同名子模块(the importing module needs to use submodules with the same name from different packages).综上所述，一般情况应该使用import , 但有几个例外1)module文档告诉你要用from-import的2)导入一个包组件。需要一个包里面的某个子模块，一般用from A.b import c比import A.b.c 更方便 且不会冒混淆的危险.使用帮助dir（模块名）—&gt;查看模块内包含的函数 help(模块名.函数名)—&gt;查看函数如何使用练习模块： matplotlib————&gt;绘图模块 binascii——————&gt; 列表初始化&gt;&gt;&gt;a=[0]*20——&gt;a=[0，0，0，…0，0]]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[仿射密码]]></title>
-    <url>%2F2017%2F11%2F26%2F%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81%2F</url>
-    <content type="text"><![CDATA[仿射密码Encryptcipher=（keyA*plaintext+keyB）mod26C= Ek(m)=(k1m+k2) mod n DecryptM= Dk(c)=k3(c- k2) mod n（其中（k3 ×k1）mod26 = 1）]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[x86汇编常见寄存器]]></title>
-    <url>%2F2017%2F11%2F20%2FX86%E5%B8%B8%E8%A7%81%E5%AF%84%E5%AD%98%E5%99%A8%2F</url>
-    <content type="text"><![CDATA[X86汇编中常见寄存器常见的寄存器： 4个数据寄存器(EAX、EBX、ECX和EDX) 2个变址和指针寄存器(ESI和EDI) 2个指针寄存器(ESP和EBP) 6个段寄存器(ES、CS、SS、DS、FS和GS) 1个指令指针寄存器(EIP) 1个标志寄存器(EFlags) 数据寄存器寄存器ESP EIP寄存器存储要读取指令的地址 EAX累加器 EBX基地址寄存器 ECX计数寄存器 EDX整数除法产生的余数 ESI/EDI 源/目标索引寄存器 指针寄存器链接]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>%2F2017%2F11%2F11%2F%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%2F</url>
-    <content type="text"><![CDATA[##CTF之隐写]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[关于CTF中zipde总结]]></title>
-    <url>%2F2017%2F10%2F28%2F%E5%85%B3%E4%BA%8ECTF%E4%B8%ADzip%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[一篇好文章的链接]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[推荐几个大佬的博客]]></title>
-    <url>%2F2017%2F09%2F09%2F%E6%8E%A8%E8%8D%90%E9%93%BE%E6%8E%A5%2F</url>
-    <content type="text"><![CDATA[pupil离别歌L-teamnMark一些技能与知识知道创宇技能表]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Bugku-CTF Writeup]]></title>
-    <url>%2F2017%2F06%2F25%2Fbugku-CTF%2F</url>
-    <content type="text"><![CDATA[#平台链接 #webwriteup链接 #CryptoWriteup链接 #Misc图穷匕见-链接 好多压缩包-链接 ######ps：一个研究CTF大佬的博客CTFzip攻略]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>%2F2017%2F06%2F25%2Fmarkdown%2F</url>
-    <content type="text"><![CDATA[欢迎使用 Cmd Markdown 编辑阅读器 我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，Cmd Markdown 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown： 整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持） 除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载： Windows/Mac/Linux 全平台客户端 请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 新文稿 或者使用快捷键 Ctrl+Alt+N。 什么是 MarkdownMarkdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，粗体 或者 斜体 某些文字，更棒的是，它还可以 1. 制作一份待办事宜 Todo 列表 [ ] 支持以 PDF 格式导出文稿 [ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率 [x] 新增 Todo 列表功能 [x] 修复 LaTex 公式渲染问题 [x] 新增 LaTex 公式编号功能 2. 书写一个质能守恒公式[^LaTeX]$$E=mc^2$$ 3. 高亮一段代码[^code]1234567@requires_authorizationclass SomeClass: passif __name__ == '__main__': # A comment print 'hello world' 4. 高效绘制 流程图12345678st=&gt;start: Startop=&gt;operation: Your Operationcond=&gt;condition: Yes or No?e=&gt;endst-&gt;op-&gt;condcond(yes)-&gt;econd(no)-&gt;op 5. 高效绘制 序列图123Alice-&gt;Bob: Hello Bob, how are you?Note right of Bob: Bob thinksBob--&gt;Alice: I am good thanks! 6. 高效绘制 甘特图12345678910111213title 项目开发流程section 项目确定 需求分析 :a1, 2016-06-22, 3d 可行性报告 :after a1, 5d 概念验证 : 5dsection 项目实施 概要设计 :2016-07-05 , 5d 详细设计 :2016-07-08, 10d 编码 :2016-07-15, 10d 测试 :2016-07-22, 5dsection 发布验收 发布: 2d 验收: 3d 7. 绘制表格 项目 价格 数量 计算机 \$1600 5 手机 \$12 12 管线 \$1 234 8. 更详细语法说明想要查看更详细的语法说明，可以参考我们准备的 Cmd Markdown 简明语法手册，进阶用户可以参考 Cmd Markdown 高阶语法手册 了解更多高级功能。 总而言之，不同于其它 所见即所得 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。 什么是 Cmd Markdown您可以使用很多工具书写 Markdown，但是 Cmd Markdown 是这个星球上我们已知的、最好的 Markdown 工具——没有之一 ：）因为深信文字的力量，所以我们和你一样，对流畅书写，分享思想和知识，以及阅读体验有极致的追求，我们把对于这些诉求的回应整合在 Cmd Markdown，并且一次，两次，三次，乃至无数次地提升这个工具的体验，最终将它演化成一个 编辑/发布/阅读 Markdown 的在线平台——您可以在任何地方，任何系统/设备上管理这里的文字。 1. 实时同步预览我们将 Cmd Markdown 的主界面一分为二，左边为编辑区，右边为预览区，在编辑区的操作会实时地渲染到预览区方便查看最终的版面效果，并且如果你在其中一个区拖动滚动条，我们有一个巧妙的算法把另一个区的滚动条同步到等价的位置，超酷！ 2. 编辑工具栏也许您还是一个 Markdown 语法的新手，在您完全熟悉它之前，我们在 编辑区 的顶部放置了一个如下图所示的工具栏，您可以使用鼠标在工具栏上调整格式，不过我们仍旧鼓励你使用键盘标记格式，提高书写的流畅度。 3. 编辑模式完全心无旁骛的方式编辑文字：点击 编辑工具栏 最右侧的拉伸按钮或者按下 Ctrl + M，将 Cmd Markdown 切换到独立的编辑模式，这是一个极度简洁的写作环境，所有可能会引起分心的元素都已经被挪除，超清爽！ 4. 实时的云端文稿为了保障数据安全，Cmd Markdown 会将您每一次击键的内容保存至云端，同时在 编辑工具栏 的最右侧提示 已保存 的字样。无需担心浏览器崩溃，机器掉电或者地震，海啸——在编辑的过程中随时关闭浏览器或者机器，下一次回到 Cmd Markdown 的时候继续写作。 5. 离线模式在网络环境不稳定的情况下记录文字一样很安全！在您写作的时候，如果电脑突然失去网络连接，Cmd Markdown 会智能切换至离线模式，将您后续键入的文字保存在本地，直到网络恢复再将他们传送至云端，即使在网络恢复前关闭浏览器或者电脑，一样没有问题，等到下次开启 Cmd Markdown 的时候，她会提醒您将离线保存的文字传送至云端。简而言之，我们尽最大的努力保障您文字的安全。 6. 管理工具栏为了便于管理您的文稿，在 预览区 的顶部放置了如下所示的 管理工具栏： 通过管理工具栏可以： 发布：将当前的文稿生成固定链接，在网络上发布，分享 新建：开始撰写一篇新的文稿 删除：删除当前的文稿 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地 列表：所有新增和过往的文稿都可以在这里查看、操作 模式：切换 普通/Vim/Emacs 编辑模式 7. 阅读工具栏 通过 预览区 右上角的 阅读工具栏，可以查看当前文稿的目录并增强阅读体验。 工具栏上的五个图标依次为： 目录：快速导航当前文稿的目录结构以跳转到感兴趣的段落 视图：互换左边编辑区和右边预览区的位置 主题：内置了黑白两种模式的主题，试试 黑色主题，超炫！ 阅读：心无旁骛的阅读模式提供超一流的阅读体验 全屏：简洁，简洁，再简洁，一个完全沉浸式的写作和阅读环境 8. 阅读模式在 阅读工具栏 点击 或者按下 Ctrl+Alt+M 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。 9. 标签、分类和搜索在编辑区任意行首位置输入以下格式的文字可以标签当前文档： 标签： 未分类 标签以后的文稿在【文件列表】（Ctrl+Alt+F）里会按照标签分类，用户可以同时使用键盘或者鼠标浏览查看，或者在【文件列表】的搜索文本框内搜索标题关键字过滤文稿，如下图所示： 10. 文稿发布和分享在您使用 Cmd Markdown 记录，创作，整理，阅读文稿的同时，我们不仅希望它是一个有力的工具，更希望您的思想和知识通过这个平台，连同优质的阅读体验，将他们分享给有相同志趣的人，进而鼓励更多的人来到这里记录分享他们的思想和知识，尝试点击 (Ctrl+Alt+P) 发布这份文档给好友吧！ 再一次感谢您花费时间阅读这份欢迎稿，点击 (Ctrl+Alt+N) 开始撰写新的文稿吧！祝您在这里记录、阅读、分享愉快！ 作者 @ghosert2016 年 07月 07日 [^LaTeX]: 支持 LaTeX 编辑显示支持，例如：$\sum_{i=1}^n a_i=0$， 访问 MathJax 参考更多使用方法。 [^code]: 代码高亮功能支持包括 Java, Python, JavaScript 在内的，四十一种主流编程语言。]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[真爱生命，远离王者荣耀。]]></title>
-    <url>%2F2017%2F06%2F14%2F%E5%88%A0%E6%8E%89%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%88%E6%98%8E%E6%99%BA%E7%9A%84%E9%80%89%E6%8B%A9%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E6%B0%B8%E8%BF%9C%E6%B4%BB%E5%9C%A8%E5%90%8E%E6%82%94%E4%B8%AD%2F</url>
-    <content type="text"><![CDATA[一个人的一生应该是这样度过的：当他回首往事的时候，他不会因为虚度年华而悔恨，也不会因为碌碌无为而羞耻；这样，在临死的时候，他就能够说：“我的人生没有遗憾”。 拒绝王者荣耀总有很坑的时候！！！或者敌人太强。。。 重点是没有意义1.这个游戏让我每天睡得更晚，有时候甚至熬夜。每次打完游戏（通常不只是一局两局)，发现QQ上，微信上好多人给我发信息，我都没有看到，没有及时回复他们，耽误了日常社交 2.让我的脾气变得更坏了，二十年来从没有过的坏。对亲戚朋友大喊大叫。在游戏里打排位，特别是在你发挥得特别好但是偏偏就有队友坑，然后输了的情况下，很爱骂人。打游戏的时候如果有人来找我帮忙会特别不耐烦。打游戏的时候接到我妈打的电话，聊了几句就说：妈我还有事先挂了。但如果没有打游戏的话，聊半小时都不嫌烦。 3.降低了我的生活效率。往往计划办个事，因为玩游戏而耽误。这个是很可怕的。你会发现为了腾出时间打游戏，你做的所有的事情完成质量都降低了，都降低了，都降低了。原本做起来很放松，很享受的事情（比如洗澡)开始变得紧促，因为你要挤出时间多打一局。或者干脆不洗澡。本来计划背单词，跑步健身的时间，用来游戏，这个是也我卸载王者荣耀是最重要的原因。 4.身体 现在我的左手大拇指已经很痛了，特别是玩关羽这个英雄，特别费手指头，特别痛,而且这个游戏玩久了眼睛会痛。 5.队友方面，显然，像我这种天才少年是不适合打这种5v5的游戏的，因为这世界上最大的不公平就是智力上的不公平，还有心态上的不公平。有因为一个野怪挂机的，有明明还有机会翻盘就投降的，有手机快没电还要打排位的，有刚买了英雄连技能都不知道就去打排位的，有460的延迟还tm打排位的，网络不好去打欢乐斗地主（对网络要求不高)多好，非要来坑人，有把手机借给弟弟妹妹，儿子女儿玩的（特指排位)， 还有因为自己打的不爽，不想打了就喊着对面快点推，催着队友快点投降的。合着9个玩家辛辛苦苦发育，补兵十分钟，就因为你没心情玩了，马上结束游戏？ （即使是对面的敌人说让我们快点推，说他不打了，要送人头，我也不爽)，9个人辛辛苦苦发育这么久，正准备大开杀戒，就因为你一个人不想玩了站在泉水里”快点投，不打了” “快点，别浪费我时间”， 我们9个人为你一个人服务的？有时候你就根本不知道他们是怎么想 我感觉再玩下去，我会被这些傻逼队友气死.排位三个挂机的。这种游戏和其它游戏不一样。在同样的技术水平下，人数上的优势是完全可以决定一场比赛的胜负的。举报？多打几局就回到100分了。所以当你游戏中有队友挂机，应该充分的理解，人家的公交，地铁到站了，不可能接着陪你玩。人家下课，放学了，不可能接着陪你玩。人家想上厕所，不可能接着陪你玩。人家基友给他打电话，不可能接着陪你玩。人家外卖到了，不可能接着陪你玩。你说这是排位？排位又怎样？反正不可能接着陪你玩所以，有一颗懂得体谅他人难处的心，真的很重要（可爱脸)当然，游戏曾经带来的快乐也是需要承认的，但客观上它确实影响到我的生活，所以我选择了卸载，我还年轻，我需要自己好 原文链接 @所有人：别玩王者荣耀了！ 人类已经很难阻止《王者荣耀》前进的步伐了，进入2017年01月份以来，王者荣耀几乎以百分百的优势碾压所有游戏类App，就算是在App总榜中，也从未跌出榜单的第十名。 2017年02月份，王者荣耀的日活跃用户达到8000万，现在甚至更高，从2016年01月至今，王者荣耀百度指数从未停止增长，而根据艾媒网预测，这个数据将持续增长到2018年。 从未有过手游能如此疯狂，当然最疯狂的还不是王者荣耀的日活跃量，而是用户每天在王者荣耀上花掉的时间，我们先来看一份由QuestMobile数据提供的手游数据。 表格显示，从三月份的数据看，平均每位用户每天要用40分钟左右在王者荣耀上，大部分用户肯定远远不止这个时间。 40分钟，这是多么可怕的一个数字。40分钟我们可以阅读好几篇有价值的文章： Python魔法方法指南 「Growth Hacker」 - 增长黑客 读一读文档：Welcome to Python.org 40分钟我们可以学习编写很多代码： Python 的练手项目有哪些值得推荐？ 有什么值得推荐的Java Web练手项目？逛一逛Github/OSC 40分钟我们可以听很多前辈们的经验： 知乎 Live - 前端工程师的入门与进阶 知乎 Live - 爬虫从入门到进阶 知乎 Live - 如何在计算机校招中脱颖而出 知乎 Live - 30天最受欢迎的Live 40分钟我们可以学习到太多有价值的东西了。那么，为什么不卸载手机上的王者荣耀：约上你喜欢的妹子看个电影、约上你的朋友去球赛挥洒汗水、去图书馆闻一闻那迷人的书香。生命有限，且行且珍惜吧。（附上高三最喜欢的诗）]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[15th-GYCTF]]></title>
-    <url>%2F2017%2F06%2F12%2F15th%20GYCTF%2F</url>
-    <content type="text"><![CDATA[date: 2017-06-12 14:59:44 tags: CTF第一&amp;二题Web（不是原题但类似）题目说这个过滤了很多敏感符号，于是先构造一下常用的payload： Username:’ or 1=1 # Password:随意 发现or 和 #都被过滤掉了，通过测试发现–也被过滤了，看起来是很可怕，但是不过幸好’没有被过滤，于是构造一个payload: username=travis’=’（一般数据库里不可能有这个小名） password=travis’=’ 这个时候成果获得flag为什么这样可以绕过呢？当提交username=travis’=’&amp;password=travis’=’语句会变成如下： select * from user where username=’travis’=’’ and password=’travis’=’’ 这时候还不够清晰，提取前一段判断出来（后面的同样道理）username=’travis’=’’这是有2个等号，然后计算顺序从左到右，先计算username=’travis’ 一般数据库里不可能有这个小名（若有，就换一个字符串），所以这里返回值为0（相当于false）然后0=’’ 这个结果呢？就是返回1（相当于true）所以这样的注入相当于select from user where 1 and 1也等于 select from user上面那个比较是弱类型的比较，以下情况都会为true 1=’1’ 1=’1.0’ 1=’1后接字母(再后面有数字也可以) ‘0=’除了非0数字开头的字符串’（总体上只要前面达成0的话，要使语句为true很简单，所以这题的万能密码只要按上面的法子去写可以写很多） 第三题（文件上传）题目描述：上传一个php文件！ 随便挑一个小文件，发现它对上传的文件有一定要求：要上传php文件，但是文件类型只支持jpg，gif，png. 所以想到了00截断：%00截断的核心，就是chr(0)这个字符 先说一下这个字符，这个字符不为空(Null)，也不是空字符(“”)，更不是空格！ 当程序在输出含有chr(0)变量时，chr(0)后面的数据会被停止，换句话说，就是误把它当成结束符，后面的数据直接忽略，这就导致漏洞产生 12345path=&quot;upfiles/picture/&quot; file=&quot;20121212.jpg&quot; &lt;font color=#ff0000 face=&quot;黑体&quot;&gt;upfilename=path &amp; file&lt;/font&gt; &apos;最后的上传地址 %&gt; 就这段代码中的path为上传的路径，file为生成的文件名，upfilename为上传后的地址，程序表面是没什么问题，但如果path可以由用户自定义（path这个参数往往是从表单或参数传过来的，能够自定义），所以就产生了上传路径截断漏洞 比如我在表单中把路径改成了“upfiles/1.aspChr(0)”这样上传路径就成了 path=”upfiles/1.aspChr(0)” chr(0)代表那个截断字符这时变量被输出时，就成了upfiles/1.asp而不是upfiles/upfiles/1.aspChr(0)20121212.jpg很明显，upfile/1.asp就成了she11 你可以马上做个实验 把上面的代码修改一下： 12345path=&quot;upfiles/1.asp&quot; &amp; Chr(0) &apos;asp中chr(0)表示截断字符file=&quot;20121212.jpg&quot; upfilename=path &amp; file &apos;最后的上传地址 response.write upfilename %&gt; 眼见为实，你会发现最后输出的upfilename确实是upfile/1.asp，变量输出是这样，上传时生成文件当然也会这样，这就是大家常听到的路径截断上传! 回到题中：我们可以在burp中修改path参数～打开burp： 发现 path=“/uploads/” 文件名 filename=“1493190357627.gif”（gif满足文件要求） 本来最后的上传地址：path &amp; filename /uploads/1493190357627.gif 如果加上%00截断呢？ /uploads/1.php%001493190357627.gif 原文 [第四题] (http://www.shiyanbar.com/ctf/1848)这个很详细链接]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[New start!]]></title>
-    <url>%2F2017%2F06%2F11%2FMy-blog'-start%2F</url>
-    <content type="text"><![CDATA[My blog’s start !date: 2017-06-11 21:45:03 几经周折终于搭好了博客（激动），在此记录一下。希望以后自己可以走的更远，不忘初衷的走下去，加油。]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[my new post]]></title>
-    <url>%2F2017%2F06%2F11%2Fmy-new-post%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2017%2F06%2F11%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[The first program and how to write a blog. Quick StartCreate a new post1$ hexo new "My New Post" (name) 新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。 文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。 More info: Writing ###hexo clean1hexo clean 清除缓存文件 db.json 和已生成的静态文件 public 。 网站显示异常时可以执行这条命令试试。Run server 1$ hexo server(S) 启动本地服务器，用于预览主题。默认地址： http://localhost:4000/ hexo s 是 hexo server 的缩写，命令效果一致； 预览的同时可以修改文章内容或主题代码，保存后刷新页面即可； 对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。 More info: Server Generate static files1$ hexo generate(g) 生成网站静态文件到默认设置的 public 文件夹。 便于查看网站生成的静态文件或者手动部署网站； 如果使用自动部署，不需要先执行该命令； hexo g 是 hexo generate 的缩写，命令效果一致。 More info: Generating Deploy to remote sites1$ hexo deploy(d) 自动生成网站静态文件，并部署到设定的仓库。 hexo d 是 hexo deploy 的缩写，命令效果一致。 More info: Deployment ###hexo new page1$ hexo new page aboutme 新建一个标题为 aboutme 的页面，默认链接地址为 主页地址/aboutme/ 标题可以为中文，但一般习惯用英文； 页面标题和文章一样可以随意修改； 页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。]]></content>
-  </entry>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Python笔记2017.11.26]]></title>
+      <url>/2017/11/26/Python%E7%AC%94%E8%AE%B011.26/</url>
+      <content type="html"><![CDATA[<h1 id="Python笔记"><a href="#Python笔记" class="headerlink" title="Python笔记"></a>Python笔记</h1><h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2><p><code>&gt;&gt;&gt;ord(&#39;A&#39;)</code>————————&gt;65</p>
+<p><code>&gt;&gt;&gt;chr(65)</code>————————&gt;A</p>
+<p><code>&gt;&gt;&gt;bin(十进制数)</code>——————&gt;二进制数</p>
+<p><code>&gt;&gt;&gt;hex(十进制数)</code>——————&gt;十六进制数</p>
+<h2 id="模块导入及函数使用"><a href="#模块导入及函数使用" class="headerlink" title="模块导入及函数使用"></a>模块导入及函数使用</h2><ul>
+<li><font color="#FF0000">模块</font> 是指一个可以交互使用，或者从另一Python 程序访问的代码段。只要导入了一个模块，就可以引用它的任何公共的函数、类或属性。模块可以通过这种方法来使用其它模块的功能。</li>
+</ul>
+<h3 id="方法一：import-模块名"><a href="#方法一：import-模块名" class="headerlink" title="方法一：import 模块名"></a>方法一：<code>import 模块名</code></h3><ul>
+<li>用import语句导入模块，就在当前的名称空间(namespace)建立了一个到该模块的引用.这种引用必须使用全称，也就是说，当使用在被导入模块中定义的函数时，必须包含模块的名字。所以不能只使用 funcname，而应该使用 modname.funcname </li>
+</ul>
+<h3 id="方法二-from-模块名-import-函数名-或者-from-modname-import"><a href="#方法二-from-模块名-import-函数名-或者-from-modname-import" class="headerlink" title="方法二:from 模块名 import 函数名 或者  from modname import *"></a>方法二:<code>from 模块名 import 函数名</code> 或者  <code>from modname import *</code></h3><ul>
+<li>与第1种方法的区别：funcname 被直接导入到本地名字空间去了，所以它可以直接使用，而不需要加上模块名的限定 ,而* 表示，该模块的所有公共对象(public objects)都被导入到 当前的名称空间，也就是任何只要不是以”_”开始的东西都会被导入。 </li>
+<li>modname没有被定义，所以modname.funcname这种方式不起作用。并且，如果funcname如果已经被定义，它会被新版本（该导入模块中的版本）所替代。如果funcname被改成指向其他对象，modname不能不会觉察到。 </li>
+<li><p>建议:<br>1)如果你要经常访问模块的属性和方法，且不想一遍又一遍地敲入模块名，使用 <code>from module import</code> </p>
+<p>2)如果你想要有选择地导入某些属性和方法，而不想要其它的，使用 <code>from module import</code></p>
+<p>3)如果模块包含的属性和方法与你的某个模块同名，你必须使用<code>import module</code>来避免名字冲突</p>
+<p>4)尽量少用 from module import * ，因为判定一个特殊的函数或属性是从哪来的有些困难，并且会造成调试和重构都更困难。</p>
+<h3 id="方法三：内建函数-import"><a href="#方法三：内建函数-import" class="headerlink" title="方法三：内建函数__import__()"></a>方法三：内建函数<code>__import__()</code></h3></li>
+<li>除了前面两种使用import关键字的方法以外，我们还可以使用内建函数 <strong>import</strong>() 来导入module。两者的区别是，import 后面跟的必须是一个类型(type)，而<strong>import</strong>() 的参数是一个字符串，这个字符串可能来自配置文件，也可能是某个表达式计算结果。例如<br>mymodule = <strong>import</strong> (’module_name’) </li>
+<li>附注:<br>1)模块的内容都放在一个模块文件中，如 mymodule 的内容应该放在PYTHONPATH 目录下的一个mymodule.py中，C实现的除外<br>2)包可以将几个模块名称空间组织起来, 如A.b 就表示在包A中的一个子模块b<br>可以单独导入某一个子模块，如Python文档中给出的例子<br>import sound.effects.echo<br>这样必须使用全称对里面的对象进行引用，如<br>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)<br>还可以使用下面的语句来加载echo子模块<br>from Sound.Effects import echo<br>它在没有包前缀的情况下也可以使用， 所以它可以如下方式调用：<br>echo.echofilter(input, output, delay=0.7, atten=4)<br>不主张从一个包或模块中用import * 导入所有模块，因为这样的通常会导致可读性很差。<br>from Package import specific_submodule的用法并没有错，实际上这还是推荐的用法，除非导入的模块需要使用其它包中的同名子模块(the importing module needs to use submodules with the same name from different packages).<br>综上所述，一般情况应该使用import , 但有几个例外<br>1)module文档告诉你要用from-import的<br>2)导入一个包组件。需要一个包里面的某个子模块，一般用from A.b import c比import A.b.c 更方便 且不会冒混淆的危险.<h3 id="使用帮助"><a href="#使用帮助" class="headerlink" title="使用帮助"></a>使用帮助</h3><code>dir（模块名）</code>—&gt;查看模块内包含的函数</li>
+</ul>
+<p><code>help(模块名.函数名)</code>—&gt;查看函数如何使用<br>练习模块：</p>
+<p>matplotlib————&gt;绘图模块</p>
+<p>binascii——————&gt;</p>
+<h2 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h2><p><code>&gt;&gt;&gt;a=[0]*20</code>——&gt;a=[0，0，0，…0，0]</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[仿射密码]]></title>
+      <url>/2017/11/26/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81/</url>
+      <content type="html"><![CDATA[<h1 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h1><h2 id="Encrypt"><a href="#Encrypt" class="headerlink" title="Encrypt"></a>Encrypt</h2><p>cipher=（keyA*plaintext+keyB）mod26<br>C= Ek(m)=(k1m+k2) mod n</p>
+<h2 id="Decrypt"><a href="#Decrypt" class="headerlink" title="Decrypt"></a>Decrypt</h2><p>M= Dk(c)=k3(c- k2) mod n（其中（k3 ×k1）mod26 = 1）</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[x86汇编常见寄存器]]></title>
+      <url>/2017/11/20/X86%E5%B8%B8%E8%A7%81%E5%AF%84%E5%AD%98%E5%99%A8/</url>
+      <content type="html"><![CDATA[<h1 id="X86汇编中常见寄存器"><a href="#X86汇编中常见寄存器" class="headerlink" title="X86汇编中常见寄存器"></a>X86汇编中常见寄存器</h1><p>常见的寄存器：</p>
+<p>4个数据寄存器(EAX、EBX、ECX和EDX)</p>
+<p>2个变址和指针寄存器(ESI和EDI) 2个指针寄存器(ESP和EBP)</p>
+<p>6个段寄存器(ES、CS、SS、DS、FS和GS)</p>
+<p>1个指令指针寄存器(EIP) 1个标志寄存器(EFlags)</p>
+<h2 id="数据寄存器"><a href="#数据寄存器" class="headerlink" title="数据寄存器"></a>数据寄存器</h2><p>寄存器ESP</p>
+<p>EIP寄存器存储要读取指令的地址</p>
+<p>EAX累加器</p>
+<p>EBX基地址寄存器</p>
+<p>ECX计数寄存器</p>
+<p>EDX整数除法产生的余数</p>
+<p>ESI/EDI 源/目标索引寄存器</p>
+<h2 id="指针寄存器"><a href="#指针寄存器" class="headerlink" title="指针寄存器"></a>指针寄存器</h2><p><a href="http://blog.csdn.net/u011822516/article/details/19931253" target="_blank" rel="external">链接</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/2017/11/11/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/</url>
+      <content type="html"><![CDATA[<p>##<a href="http://www.jianshu.com/p/02fdd5edd9fc" target="_blank" rel="external">CTF之隐写</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于CTF中zipde总结]]></title>
+      <url>/2017/10/28/%E5%85%B3%E4%BA%8ECTF%E4%B8%ADzip%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<h2 id="一篇好文章的链接"><a href="#一篇好文章的链接" class="headerlink" title="一篇好文章的链接"></a>一篇好文章的<a href="http://bobao.360.cn/ctf/learning/203.html" target="_blank" rel="external">链接</a></h2>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[推荐几个大佬的博客]]></title>
+      <url>/2017/09/09/%E6%8E%A8%E8%8D%90%E9%93%BE%E6%8E%A5/</url>
+      <content type="html"><![CDATA[<h2 id="pupil"><a href="#pupil" class="headerlink" title="pupil"></a><a href="http://pupiles.com/" target="_blank" rel="external">pupil</a></h2><h2 id="离别歌"><a href="#离别歌" class="headerlink" title="离别歌"></a><a href="https://www.leavesongs.com/" target="_blank" rel="external">离别歌</a></h2><h2 id="L-team"><a href="#L-team" class="headerlink" title="L-team"></a><a href="http://l-team.org/" target="_blank" rel="external">L-team</a></h2><h2 id="nMark"><a href="#nMark" class="headerlink" title="nMark"></a><a href="https://thief.one/" target="_blank" rel="external">nMark</a></h2><h1 id="一些技能与知识"><a href="#一些技能与知识" class="headerlink" title="一些技能与知识"></a>一些技能与知识</h1><h2 id="知道创宇技能表"><a href="#知道创宇技能表" class="headerlink" title="知道创宇技能表"></a><a href="http://blog.knownsec.com/Knownsec_RD_Checklist/" target="_blank" rel="external">知道创宇技能表</a></h2>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Bugku-CTF Writeup]]></title>
+      <url>/2017/06/25/bugku-CTF/</url>
+      <content type="html"><![CDATA[<p>#<a href="http://ctf.bugku.com/" target="_blank" rel="external">平台链接</a></p>
+<p>#web<br><a href="http://pupiles.com/Bugku-Web-writeup.html#more" target="_blank" rel="external">writeup链接</a></p>
+<p>#Crypto<br><a href="https://my.oschina.net/keyven/blog/918894" target="_blank" rel="external">Writeup链接</a></p>
+<p>#Misc<br><a href="http://www.cnblogs.com/WangAoBo/p/6950547.html" target="_blank" rel="external">图穷匕见-链接</a></p>
+<p><a href="http://www.cnblogs.com/WangAoBo/p/6951160.html" target="_blank" rel="external">好多压缩包-链接</a></p>
+<p>######ps：<a href="http://www.cnblogs.com/WangAoBo/" target="_blank" rel="external">一个研究CTF大佬的博客</a><br><a href="http://bobao.360.cn/ctf/detail/203.html" target="_blank" rel="external">CTFzip攻略</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/2017/06/25/markdown/</url>
+      <content type="html"><![CDATA[<h1 id="欢迎使用-Cmd-Markdown-编辑阅读器"><a href="#欢迎使用-Cmd-Markdown-编辑阅读器" class="headerlink" title="欢迎使用 Cmd Markdown 编辑阅读器"></a>欢迎使用 Cmd Markdown 编辑阅读器</h1><hr>
+<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
+<blockquote>
+<ul>
+<li>整理知识，学习笔记</li>
+<li>发布日记，杂文，所见所想</li>
+<li>撰写发布技术文稿（代码支持）</li>
+<li>撰写发布学术论文（LaTeX 公式支持）</li>
+</ul>
+</blockquote>
+<p><img src="https://www.zybuluo.com/static/img/logo.png" alt="cmd-markdown-logo"></p>
+<p>除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：</p>
+<h3 id="Windows-Mac-Linux-全平台客户端"><a href="#Windows-Mac-Linux-全平台客户端" class="headerlink" title="Windows/Mac/Linux 全平台客户端"></a><a href="https://www.zybuluo.com/cmd/" target="_blank" rel="external">Windows/Mac/Linux 全平台客户端</a></h3><blockquote>
+<p>请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 <i class="icon-file"></i> <strong>新文稿</strong> 或者使用快捷键 <code>Ctrl+Alt+N</code>。</p>
+</blockquote>
+<hr>
+<h2 id="什么是-Markdown"><a href="#什么是-Markdown" class="headerlink" title="什么是 Markdown"></a>什么是 Markdown</h2><p>Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字，更棒的是，它还可以</p>
+<h3 id="1-制作一份待办事宜-Todo-列表"><a href="#1-制作一份待办事宜-Todo-列表" class="headerlink" title="1. 制作一份待办事宜 Todo 列表"></a>1. 制作一份待办事宜 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#13-待办事宜-todo-列表" target="_blank" rel="external">Todo 列表</a></h3><ul>
+<li>[ ] 支持以 PDF 格式导出文稿</li>
+<li>[ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
+<li>[x] 新增 Todo 列表功能</li>
+<li>[x] 修复 LaTex 公式渲染问题</li>
+<li>[x] 新增 LaTex 公式编号功能</li>
+</ul>
+<h3 id="2-书写一个质能守恒公式-LaTeX"><a href="#2-书写一个质能守恒公式-LaTeX" class="headerlink" title="2. 书写一个质能守恒公式[^LaTeX]"></a>2. 书写一个质能守恒公式[^LaTeX]</h3><p>$$E=mc^2$$</p>
+<h3 id="3-高亮一段代码-code"><a href="#3-高亮一段代码-code" class="headerlink" title="3. 高亮一段代码[^code]"></a>3. 高亮一段代码[^code]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@requires_authorization</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># A comment</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'hello world'</span></div></pre></td></tr></table></figure>
+<h3 id="4-高效绘制-流程图"><a href="#4-高效绘制-流程图" class="headerlink" title="4. 高效绘制 流程图"></a>4. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图" target="_blank" rel="external">流程图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: Start</div><div class="line">op=&gt;operation: Your Operation</div><div class="line">cond=&gt;condition: Yes or No?</div><div class="line">e=&gt;end</div><div class="line"></div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;e</div><div class="line">cond(no)-&gt;op</div></pre></td></tr></table></figure>
+<h3 id="5-高效绘制-序列图"><a href="#5-高效绘制-序列图" class="headerlink" title="5. 高效绘制 序列图"></a>5. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图" target="_blank" rel="external">序列图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Alice-&gt;Bob: Hello Bob, how are you?</div><div class="line">Note right of Bob: Bob thinks</div><div class="line">Bob--&gt;Alice: I am good thanks!</div></pre></td></tr></table></figure>
+<h3 id="6-高效绘制-甘特图"><a href="#6-高效绘制-甘特图" class="headerlink" title="6. 高效绘制 甘特图"></a>6. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图" target="_blank" rel="external">甘特图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">title 项目开发流程</div><div class="line">section 项目确定</div><div class="line">    需求分析       :a1, 2016-06-22, 3d</div><div class="line">    可行性报告     :after a1, 5d</div><div class="line">    概念验证       : 5d</div><div class="line">section 项目实施</div><div class="line">    概要设计      :2016-07-05  , 5d</div><div class="line">    详细设计      :2016-07-08, 10d</div><div class="line">    编码          :2016-07-15, 10d</div><div class="line">    测试          :2016-07-22, 5d</div><div class="line">section 发布验收</div><div class="line">    发布: 2d</div><div class="line">    验收: 3d</div></pre></td></tr></table></figure>
+<h3 id="7-绘制表格"><a href="#7-绘制表格" class="headerlink" title="7. 绘制表格"></a>7. 绘制表格</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right">\$1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align:right">\$12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align:right">\$1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-更详细语法说明"><a href="#8-更详细语法说明" class="headerlink" title="8. 更详细语法说明"></a>8. 更详细语法说明</h3><p>想要查看更详细的语法说明，可以参考我们准备的 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown" target="_blank" rel="external">Cmd Markdown 简明语法手册</a>，进阶用户可以参考 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册" target="_blank" rel="external">Cmd Markdown 高阶语法手册</a> 了解更多高级功能。</p>
+<p>总而言之，不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。<strong>Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。</strong> 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。</p>
+<hr>
+<h2 id="什么是-Cmd-Markdown"><a href="#什么是-Cmd-Markdown" class="headerlink" title="什么是 Cmd Markdown"></a>什么是 Cmd Markdown</h2><p>您可以使用很多工具书写 Markdown，但是 Cmd Markdown 是这个星球上我们已知的、最好的 Markdown 工具——没有之一 ：）因为深信文字的力量，所以我们和你一样，对流畅书写，分享思想和知识，以及阅读体验有极致的追求，我们把对于这些诉求的回应整合在 Cmd Markdown，并且一次，两次，三次，乃至无数次地提升这个工具的体验，最终将它演化成一个 <strong>编辑/发布/阅读</strong> Markdown 的在线平台——您可以在任何地方，任何系统/设备上管理这里的文字。</p>
+<h3 id="1-实时同步预览"><a href="#1-实时同步预览" class="headerlink" title="1. 实时同步预览"></a>1. 实时同步预览</h3><p>我们将 Cmd Markdown 的主界面一分为二，左边为<strong>编辑区</strong>，右边为<strong>预览区</strong>，在编辑区的操作会实时地渲染到预览区方便查看最终的版面效果，并且如果你在其中一个区拖动滚动条，我们有一个巧妙的算法把另一个区的滚动条同步到等价的位置，超酷！</p>
+<h3 id="2-编辑工具栏"><a href="#2-编辑工具栏" class="headerlink" title="2. 编辑工具栏"></a>2. 编辑工具栏</h3><p>也许您还是一个 Markdown 语法的新手，在您完全熟悉它之前，我们在 <strong>编辑区</strong> 的顶部放置了一个如下图所示的工具栏，您可以使用鼠标在工具栏上调整格式，不过我们仍旧鼓励你使用键盘标记格式，提高书写的流畅度。</p>
+<p><img src="https://www.zybuluo.com/static/img/toolbar-editor.png" alt="tool-editor"></p>
+<h3 id="3-编辑模式"><a href="#3-编辑模式" class="headerlink" title="3. 编辑模式"></a>3. 编辑模式</h3><p>完全心无旁骛的方式编辑文字：点击 <strong>编辑工具栏</strong> 最右侧的拉伸按钮或者按下 <code>Ctrl + M</code>，将 Cmd Markdown 切换到独立的编辑模式，这是一个极度简洁的写作环境，所有可能会引起分心的元素都已经被挪除，超清爽！</p>
+<h3 id="4-实时的云端文稿"><a href="#4-实时的云端文稿" class="headerlink" title="4. 实时的云端文稿"></a>4. 实时的云端文稿</h3><p>为了保障数据安全，Cmd Markdown 会将您每一次击键的内容保存至云端，同时在 <strong>编辑工具栏</strong> 的最右侧提示 <code>已保存</code> 的字样。无需担心浏览器崩溃，机器掉电或者地震，海啸——在编辑的过程中随时关闭浏览器或者机器，下一次回到 Cmd Markdown 的时候继续写作。</p>
+<h3 id="5-离线模式"><a href="#5-离线模式" class="headerlink" title="5. 离线模式"></a>5. 离线模式</h3><p>在网络环境不稳定的情况下记录文字一样很安全！在您写作的时候，如果电脑突然失去网络连接，Cmd Markdown 会智能切换至离线模式，将您后续键入的文字保存在本地，直到网络恢复再将他们传送至云端，即使在网络恢复前关闭浏览器或者电脑，一样没有问题，等到下次开启 Cmd Markdown 的时候，她会提醒您将离线保存的文字传送至云端。简而言之，我们尽最大的努力保障您文字的安全。</p>
+<h3 id="6-管理工具栏"><a href="#6-管理工具栏" class="headerlink" title="6. 管理工具栏"></a>6. 管理工具栏</h3><p>为了便于管理您的文稿，在 <strong>预览区</strong> 的顶部放置了如下所示的 <strong>管理工具栏</strong>：</p>
+<p><img src="https://www.zybuluo.com/static/img/toolbar-manager.jpg" alt="tool-manager"></p>
+<p>通过管理工具栏可以：</p>
+<p><i class="icon-share"></i> 发布：将当前的文稿生成固定链接，在网络上发布，分享<br><i class="icon-file"></i> 新建：开始撰写一篇新的文稿<br><i class="icon-trash"></i> 删除：删除当前的文稿<br><i class="icon-cloud"></i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地<br><i class="icon-reorder"></i> 列表：所有新增和过往的文稿都可以在这里查看、操作<br><i class="icon-pencil"></i> 模式：切换 普通/Vim/Emacs 编辑模式</p>
+<h3 id="7-阅读工具栏"><a href="#7-阅读工具栏" class="headerlink" title="7. 阅读工具栏"></a>7. 阅读工具栏</h3><p><img src="https://www.zybuluo.com/static/img/toolbar-reader.jpg" alt="tool-manager"></p>
+<p>通过 <strong>预览区</strong> 右上角的 <strong>阅读工具栏</strong>，可以查看当前文稿的目录并增强阅读体验。</p>
+<p>工具栏上的五个图标依次为：</p>
+<p><i class="icon-list"></i> 目录：快速导航当前文稿的目录结构以跳转到感兴趣的段落<br><i class="icon-chevron-sign-left"></i> 视图：互换左边编辑区和右边预览区的位置<br><i class="icon-adjust"></i> 主题：内置了黑白两种模式的主题，试试 <strong>黑色主题</strong>，超炫！<br><i class="icon-desktop"></i> 阅读：心无旁骛的阅读模式提供超一流的阅读体验<br><i class="icon-fullscreen"></i> 全屏：简洁，简洁，再简洁，一个完全沉浸式的写作和阅读环境</p>
+<h3 id="8-阅读模式"><a href="#8-阅读模式" class="headerlink" title="8. 阅读模式"></a>8. 阅读模式</h3><p>在 <strong>阅读工具栏</strong> 点击 <i class="icon-desktop"></i> 或者按下 <code>Ctrl+Alt+M</code> 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。</p>
+<h3 id="9-标签、分类和搜索"><a href="#9-标签、分类和搜索" class="headerlink" title="9. 标签、分类和搜索"></a>9. 标签、分类和搜索</h3><p>在编辑区任意行首位置输入以下格式的文字可以标签当前文档：</p>
+<p>标签： 未分类</p>
+<p>标签以后的文稿在【文件列表】（Ctrl+Alt+F）里会按照标签分类，用户可以同时使用键盘或者鼠标浏览查看，或者在【文件列表】的搜索文本框内搜索标题关键字过滤文稿，如下图所示：</p>
+<p><img src="https://www.zybuluo.com/static/img/file-list.png" alt="file-list"></p>
+<h3 id="10-文稿发布和分享"><a href="#10-文稿发布和分享" class="headerlink" title="10. 文稿发布和分享"></a>10. 文稿发布和分享</h3><p>在您使用 Cmd Markdown 记录，创作，整理，阅读文稿的同时，我们不仅希望它是一个有力的工具，更希望您的思想和知识通过这个平台，连同优质的阅读体验，将他们分享给有相同志趣的人，进而鼓励更多的人来到这里记录分享他们的思想和知识，尝试点击 <i class="icon-share"></i> (Ctrl+Alt+P) 发布这份文档给好友吧！</p>
+<hr>
+<p>再一次感谢您花费时间阅读这份欢迎稿，点击 <i class="icon-file"></i> (Ctrl+Alt+N) 开始撰写新的文稿吧！祝您在这里记录、阅读、分享愉快！</p>
+<p>作者 <a href="http://weibo.com/ghosert" target="_blank" rel="external">@ghosert</a><br>2016 年 07月 07日    </p>
+<p>[^LaTeX]: 支持 <strong>LaTeX</strong> 编辑显示支持，例如：$\sum_{i=1}^n a_i=0$， 访问 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">MathJax</a> 参考更多使用方法。</p>
+<p>[^code]: 代码高亮功能支持包括 Java, Python, JavaScript 在内的，<strong>四十一</strong>种主流编程语言。</p>
+<p><img src="http://ctf.xidian.edu.cn/bbs/assets/files/2016-11-21/08:14:360-Lighthouse.jpeg" alt="image Lighthouse.jpeg"></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[真爱生命，远离王者荣耀。]]></title>
+      <url>/2017/06/14/%E5%88%A0%E6%8E%89%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%88%E6%98%8E%E6%99%BA%E7%9A%84%E9%80%89%E6%8B%A9%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E6%B0%B8%E8%BF%9C%E6%B4%BB%E5%9C%A8%E5%90%8E%E6%82%94%E4%B8%AD/</url>
+      <content type="html"><![CDATA[<p>一个人的一生应该是这样度过的：当他回首往事的时候，他不会因为虚度年华而悔恨，也不会因为碌碌无为而羞耻；这样，在临死的时候，他就能够说：“我的人生没有遗憾”。</p>
+<h2 id="拒绝王者荣耀"><a href="#拒绝王者荣耀" class="headerlink" title="拒绝王者荣耀"></a>拒绝王者荣耀</h2><h3 id="总有很坑的时候！！！或者敌人太强。。。"><a href="#总有很坑的时候！！！或者敌人太强。。。" class="headerlink" title="总有很坑的时候！！！或者敌人太强。。。"></a>总有很坑的时候！！！或者敌人太强。。。</h3><p><img src="https://ooo.0o0.ooo/2017/06/14/59414bb20cc88.png" alt=""></p>
+<p><img src="https://ooo.0o0.ooo/2017/06/14/59414b804077a.png" alt=""></p>
+<p><img src="https://ooo.0o0.ooo/2017/06/14/59414c932c3b2.png" alt=""></p>
+<h3 id="重点是没有意义"><a href="#重点是没有意义" class="headerlink" title="重点是没有意义"></a>重点是没有意义</h3><p>1.这个游戏让我每天睡得更晚，有时候甚至熬夜。每次打完游戏（通常不只是一局两局)，发现QQ上，微信上好多人给我发信息，我都没有看到，没有及时回复他们，耽误了日常社交</p>
+<p>2.让我的脾气变得更坏了，二十年来从没有过的坏。对亲戚朋友大喊大叫。在游戏里打排位，特别是在你发挥得特别好但是偏偏就有队友坑，然后输了的情况下，很爱骂人。打游戏的时候如果有人来找我帮忙会特别不耐烦。打游戏的时候接到我妈打的电话，聊了几句就说：妈我还有事先挂了。但如果没有打游戏的话，聊半小时都不嫌烦。</p>
+<p>3.降低了我的生活效率。往往计划办个事，因为玩游戏而耽误。这个是很可怕的。你会发现为了腾出时间打游戏，你做的所有的事情完成质量都降低了，都降低了，都降低了。原本做起来很放松，很享受的事情（比如洗澡)开始变得紧促，因为你要挤出时间多打一局。或者干脆不洗澡。本来计划背单词，跑步健身的时间，用来游戏，这个是也我卸载王者荣耀是最重要的原因。</p>
+<p>4.身体  现在我的左手大拇指已经很痛了，特别是玩关羽这个英雄，特别费手指头，特别痛,而且这个游戏玩久了眼睛会痛。</p>
+<p>5.队友方面，显然，像我这种天才少年是不适合打这种5v5的游戏的，因为这世界上最大的不公平就是智力上的不公平，还有心态上的不公平。有因为一个野怪挂机的，有明明还有机会翻盘就投降的，有手机快没电还要打排位的，有刚买了英雄连技能都不知道就去打排位的，有460的延迟还tm打排位的，网络不好去打欢乐斗地主（对网络要求不高)多好，非要来坑人，有把手机借给弟弟妹妹，儿子女儿玩的（特指排位)，   还有因为自己打的不爽，不想打了就喊着对面快点推，催着队友快点投降的。合着9个玩家辛辛苦苦发育，补兵十分钟，就因为你没心情玩了，马上结束游戏？  （即使是对面的敌人说让我们快点推，说他不打了，要送人头，我也不爽)，9个人辛辛苦苦发育这么久，正准备大开杀戒，就因为你一个人不想玩了站在泉水里”快点投，不打了”   “快点，别浪费我时间”， 我们9个人为你一个人服务的？有时候你就根本不知道他们是怎么想  我感觉再玩下去，我会被这些傻逼队友气死.<br>排位三个挂机的。这种游戏和其它游戏不一样。在同样的技术水平下，人数上的优势是完全可以决定一场比赛的胜负的。举报？多打几局就回到100分了。所以当你游戏中有队友挂机，应该充分的理解，人家的公交，地铁到站了，不可能接着陪你玩。人家下课，放学了，不可能接着陪你玩。人家想上厕所，不可能接着陪你玩。人家基友给他打电话，不可能接着陪你玩。人家外卖到了，不可能接着陪你玩。你说这是排位？排位又怎样？反正不可能接着陪你玩所以，有一颗懂得体谅他人难处的心，真的很重要（可爱脸)当然，游戏曾经带来的快乐也是需要承认的，但客观上它确实影响到我的生活，所以我选择了卸载，我还年轻，我需要自己好</p>
+<p><a href="https://www.zhihu.com/question/53129182/answer/133618083" target="_blank" rel="external">原文链接</a></p>
+<h3 id="所有人：别玩王者荣耀了！"><a href="#所有人：别玩王者荣耀了！" class="headerlink" title="@所有人：别玩王者荣耀了！"></a>@所有人：别玩王者荣耀了！</h3><p><img src="https://ooo.0o0.ooo/2017/06/14/59414dbe6b431.png" alt=""></p>
+<p>人类已经很难阻止《王者荣耀》前进的步伐了，进入2017年01月份以来，王者荣耀几乎以百分百的优势碾压所有游戏类App，就算是在App总榜中，也从未跌出榜单的第十名。</p>
+<p><img src="https://ooo.0o0.ooo/2017/06/14/59414e88aceaf.png" alt=""></p>
+<p>2017年02月份，王者荣耀的日活跃用户达到8000万，现在甚至更高，从2016年01月至今，王者荣耀百度指数从未停止增长，而根据艾媒网预测，这个数据将持续增长到2018年。</p>
+<p><img src="https://ooo.0o0.ooo/2017/06/14/59414ede9765f.png" alt=""></p>
+<p>从未有过手游能如此疯狂，当然最疯狂的还不是王者荣耀的日活跃量，而是用户每天在王者荣耀上花掉的时间，我们先来看一份由QuestMobile数据提供的手游数据。</p>
+<p><img src="https://ooo.0o0.ooo/2017/06/14/59414eff13277.png" alt=""></p>
+<p>表格显示，从三月份的数据看，平均每位用户每天要用40分钟左右在王者荣耀上，大部分用户肯定远远不止这个时间。</p>
+<p>40分钟，这是多么可怕的一个数字。<br>40分钟我们可以阅读好几篇有价值的文章：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/26488074" target="_blank" rel="external">Python魔法方法指南</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/26102487" target="_blank" rel="external">「Growth Hacker」 - 增长黑客</a></p>
+<p>读一读文档：<a href="https://www.python.org/doc/" target="_blank" rel="external">Welcome to Python.org</a></p>
+<p>40分钟我们可以学习编写很多代码：</p>
+<p><a href="https://www.zhihu.com/question/29372574" target="_blank" rel="external">Python 的练手项目有哪些值得推荐？</a></p>
+<p><a href="https://www.zhihu.com/question/29444491" target="_blank" rel="external">有什么值得推荐的Java Web练手项目？</a><br>逛一逛Github/OSC</p>
+<p>40分钟我们可以听很多前辈们的经验：</p>
+<p><a href="https://www.zhihu.com/lives/824618968198291456" target="_blank" rel="external">知乎 Live - 前端工程师的入门与进阶</a></p>
+<p><a href="https://www.zhihu.com/lives/827530183664861184" target="_blank" rel="external">知乎 Live - 爬虫从入门到进阶</a></p>
+<p><a href="https://www.zhihu.com/lives/838388999964987392" target="_blank" rel="external">知乎 Live - 如何在计算机校招中脱颖而出</a></p>
+<p><a href="https://www.zhihu.com/lives/hot/monthly" target="_blank" rel="external">知乎 Live - 30天最受欢迎的Live</a></p>
+<p>40分钟我们可以学习到太多有价值的东西了。<br>那么，为什么不卸载手机上的王者荣耀：约上你喜欢的妹子看个电影、约上你的朋友去球赛挥洒汗水、去图书馆闻一闻那迷人的书香。生命有限，且行且珍惜吧。（附上高三最喜欢的诗）<br><img src="https://ooo.0o0.ooo/2017/06/14/594152aec204d.png" alt=""></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[15th-GYCTF]]></title>
+      <url>/2017/06/12/15th%20GYCTF/</url>
+      <content type="html"><![CDATA[<p>date: 2017-06-12 14:59:44</p>
+<h2 id="tags-CTF"><a href="#tags-CTF" class="headerlink" title="tags: CTF"></a>tags: CTF</h2><h2 id="第一-amp-二题Web（不是原题但类似）"><a href="#第一-amp-二题Web（不是原题但类似）" class="headerlink" title="第一&amp;二题Web（不是原题但类似）"></a><a href="http://ctf5.shiyanbar.com/web/wonderkun/web/index.html" target="_blank" rel="external">第一&amp;二题Web</a>（不是原题但类似）</h2><p>题目说这个过滤了很多敏感符号，于是先构造一下常用的payload：</p>
+<ul>
+<li><p>Username:’ or 1=1 #</p>
+</li>
+<li><p>Password:随意</p>
+</li>
+</ul>
+<p>发现or 和 #都被过滤掉了，通过测试发现–也被过滤了，看起来是很可怕，但是不过幸好’没有被过滤，于是构造一个payload:</p>
+<ul>
+<li>username=travis’=’（一般数据库里不可能有这个小名）</li>
+<li>password=travis’=’</li>
+</ul>
+<p>这个时候成果获得flag<br>为什么这样可以绕过呢？<br>当提交username=travis’=’&amp;password=travis’=’<br>语句会变成如下：</p>
+<ul>
+<li>select * from user where username=’travis’=’’ and password=’travis’=’’</li>
+</ul>
+<p>这时候还不够清晰，提取前一段判断出来（后面的同样道理）<br>username=’travis’=’’<br>这是有2个等号，然后计算顺序从左到右，<br>先计算username=’travis’ 一般数据库里不可能有这个小名（若有，就换一个字符串），所以这里返回值为0（相当于false）<br>然后0=’’ 这个结果呢？就是返回1（相当于true）<br>所以这样的注入相当于<br>select <em> from user where 1 and 1<br>也等于 select </em> from user<br>上面那个比较是弱类型的比较，<br>以下情况都会为true</p>
+<ul>
+<li>1=’1’</li>
+<li>1=’1.0’</li>
+<li>1=’1后接字母(再后面有数字也可以)</li>
+<li>‘0=’除了非0数字开头的字符串’<br>（总体上只要前面达成0的话，要使语句为true很简单，所以这题的万能密码只要按上面的法子去写可以写很多）</li>
+</ul>
+<h2 id="第三题（文件上传）"><a href="#第三题（文件上传）" class="headerlink" title="第三题（文件上传）"></a><a href="http://ctf5.shiyanbar.com/web/upload/" target="_blank" rel="external">第三题（文件上传）</a></h2><p>题目描述：上传一个php文件<br>！<a href="https://ooo.0o0.ooo/2017/06/12/593e47d7b7199.png" target="_blank" rel="external"></a></p>
+<p>随便挑一个小文件，发现它对上传的文件有一定要求：要上传php文件，但是文件类型只支持jpg，gif，png.</p>
+<h3 id="所以想到了00截断："><a href="#所以想到了00截断：" class="headerlink" title="所以想到了00截断："></a>所以想到了00截断：</h3><p>%00截断的核心，就是chr(0)这个字符 </p>
+<p>先说一下这个字符，这个字符不为空(Null)，也不是空字符(“”)，更不是空格！ </p>
+<p>当程序在输出含有chr(0)变量时，chr(0)后面的数据会被停止，换句话说，就是误把它当成结束符，后面的数据直接忽略，这就导致漏洞产生 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">path=&quot;upfiles/picture/&quot; </div><div class="line">file=&quot;20121212.jpg&quot; </div><div class="line">&lt;font color=#ff0000 face=&quot;黑体&quot;&gt;</div><div class="line">upfilename=path &amp; file&lt;/font&gt; &apos;最后的上传地址 </div><div class="line">%&gt;</div></pre></td></tr></table></figure>
+<p>就这段代码中的path为上传的路径，file为生成的文件名，upfilename为上传后的地址，程序表面是没什么问题，但如果path可以由用户自定义（path这个参数往往是从表单或参数传过来的，能够自定义），所以就产生了上传路径截断漏洞 </p>
+<p>比如我在表单中把路径改成了“upfiles/1.aspChr(0)”<br>这样上传路径就成了 path=”upfiles/1.aspChr(0)” chr(0)代表那个截断字符<br>这时变量被输出时，就成了upfiles/1.asp<br>而不是upfiles/upfiles/1.aspChr(0)20121212.jpg<br>很明显，upfile/1.asp就成了she11 </p>
+<p>你可以马上做个实验 </p>
+<p>把上面的代码修改一下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">path=&quot;upfiles/1.asp&quot; &amp; Chr(0) &apos;asp中chr(0)表示截断字符</div><div class="line">file=&quot;20121212.jpg&quot; </div><div class="line">upfilename=path &amp; file &apos;最后的上传地址 </div><div class="line">response.write upfilename </div><div class="line">%&gt;</div></pre></td></tr></table></figure>
+<p>眼见为实，你会发现最后输出的upfilename确实是upfile/1.asp，变量输出是这样，上传时生成文件当然也会这样，这就是大家常听到的路径截断上传!</p>
+<p>回到题中：<br>我们可以在burp中修改path参数～<br>打开burp：</p>
+<p><img src="https://ooo.0o0.ooo/2017/06/12/593e4bd50f8be.png" alt=""></p>
+<p><img src="https://ooo.0o0.ooo/2017/06/12/593e4b81164a8.png" alt=""><br>发现        path=“/uploads/”</p>
+<p>文件名  filename=“1493190357627.gif”（gif满足文件要求）</p>
+<p>本来最后的上传地址：path &amp; filename </p>
+<p>/uploads/1493190357627.gif</p>
+<p>如果加上%00截断呢？</p>
+<p>/uploads/1.php%001493190357627.gif<br><img src="https://ooo.0o0.ooo/2017/06/12/593e4bd50f8be.png" alt=""></p>
+<p><a href="http://pan.baidu.com/s/1gePVkWj" target="_blank" rel="external">原文</a></p>
+<h2 id="第四题-http-www-shiyanbar-com-ctf-1848"><a href="#第四题-http-www-shiyanbar-com-ctf-1848" class="headerlink" title="[第四题] (http://www.shiyanbar.com/ctf/1848)"></a>[第四题] (<a href="http://www.shiyanbar.com/ctf/1848" target="_blank" rel="external">http://www.shiyanbar.com/ctf/1848</a>)</h2><p>这个很详细<a href="http://pan.baidu.com/s/1qYAZQcW" target="_blank" rel="external">链接</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[New start!]]></title>
+      <url>/2017/06/11/My-blog'-start/</url>
+      <content type="html"><![CDATA[<h1 id="My-blog’s-start"><a href="#My-blog’s-start" class="headerlink" title="My blog’s start !"></a>My blog’s start !</h1><p>date: 2017-06-11 21:45:03</p>
+<p>几经周折终于搭好了博客（激动），在此记录一下。希望以后自己可以走的更远，不忘初衷的走下去，加油。<br><img src="https://ooo.0o0.ooo/2017/06/11/593d52577239a.jpg" alt=""></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[my new post]]></title>
+      <url>/2017/06/11/my-new-post/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>/2017/06/11/hello-world/</url>
+      <content type="html"><![CDATA[<p>The first program and how to write a blog.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span> (name)</div></pre></td></tr></table></figure>
+<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
+<ul>
+<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
+</ul>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<p>###hexo clean<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure></p>
+<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
+<ul>
+<li>网站显示异常时可以执行这条命令试试。<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server(S)</div></pre></td></tr></table></figure>
+<p>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a></p>
+<ul>
+<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
+<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
+</ul>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate(g)</div></pre></td></tr></table></figure>
+<p>生成网站静态文件到默认设置的 public 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
+</ul>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy(d)</div></pre></td></tr></table></figure>
+<p>自动生成网站静态文件，并部署到设定的仓库。</p>
+<ul>
+<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
+</ul>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>###hexo new page<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new page aboutme</div></pre></td></tr></table></figure></p>
+<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址/aboutme/</p>
+<ul>
+<li>标题可以为中文，但一般习惯用英文；</li>
+<li>页面标题和文章一样可以随意修改；</li>
+<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
+</ul>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
 </search>
