@@ -78,16 +78,16 @@
 
 
 
-<meta name="description" content="Goals determine what you are going to be">
+<meta name="description" content="Python笔记##转换 &amp;gt;&amp;gt;&amp;gt;ord(&amp;#39;A&amp;#39;)————————&amp;gt;65 &amp;gt;&amp;gt;&amp;gt;chr(65)————————&amp;gt;A &amp;gt;&amp;gt;&amp;gt;bin(十进制数)——————&amp;gt;二进制数 &amp;gt;&amp;gt;&amp;gt;hex(十进制数)——————&amp;gt;十六进制数 ##模块导入及函数使用  模块 是指一个可以交互使用，或者从另一Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="my new post">
-<meta property="og:url" content="http://yoursite.com/2017/06/11/my-new-post/index.html">
+<meta property="og:title" content="Passion999">
+<meta property="og:url" content="http://yoursite.com/2017/11/26/Python笔记11.26/index.html">
 <meta property="og:site_name" content="Passion999">
-<meta property="og:description" content="Goals determine what you are going to be">
-<meta property="og:updated_time" content="2017-06-11T05:07:26.645Z">
+<meta property="og:description" content="Python笔记##转换 &amp;gt;&amp;gt;&amp;gt;ord(&amp;#39;A&amp;#39;)————————&amp;gt;65 &amp;gt;&amp;gt;&amp;gt;chr(65)————————&amp;gt;A &amp;gt;&amp;gt;&amp;gt;bin(十进制数)——————&amp;gt;二进制数 &amp;gt;&amp;gt;&amp;gt;hex(十进制数)——————&amp;gt;十六进制数 ##模块导入及函数使用  模块 是指一个可以交互使用，或者从另一Python">
+<meta property="og:updated_time" content="2017-12-03T06:03:37.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="my new post">
-<meta name="twitter:description" content="Goals determine what you are going to be">
+<meta name="twitter:title" content="Passion999">
+<meta name="twitter:description" content="Python笔记##转换 &amp;gt;&amp;gt;&amp;gt;ord(&amp;#39;A&amp;#39;)————————&amp;gt;65 &amp;gt;&amp;gt;&amp;gt;chr(65)————————&amp;gt;A &amp;gt;&amp;gt;&amp;gt;bin(十进制数)——————&amp;gt;二进制数 &amp;gt;&amp;gt;&amp;gt;hex(十进制数)——————&amp;gt;十六进制数 ##模块导入及函数使用  模块 是指一个可以交互使用，或者从另一Python">
 
 
 
@@ -105,7 +105,7 @@
   };
 </script>
 
-  <title> my new post | Passion999 </title>
+  <title>  | Passion999 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -258,7 +258,7 @@
             
             
               
-                my new post
+                
               
             
           </h1>
@@ -270,8 +270,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-06-11T13:07:26+08:00" content="2017-06-11">
-              2017-06-11
+            <time itemprop="dateCreated" datetime="2017-11-26T15:13:48+08:00" content="2017-11-26">
+              2017-11-26
             </time>
           </span>
 
@@ -298,7 +298,37 @@
       
 
       
-        
+        <h1 id="Python笔记"><a href="#Python笔记" class="headerlink" title="Python笔记"></a>Python笔记</h1><p>##转换</p>
+<p><code>&gt;&gt;&gt;ord(&#39;A&#39;)</code>————————&gt;65</p>
+<p><code>&gt;&gt;&gt;chr(65)</code>————————&gt;A</p>
+<p><code>&gt;&gt;&gt;bin(十进制数)</code>——————&gt;二进制数</p>
+<p><code>&gt;&gt;&gt;hex(十进制数)</code>——————&gt;十六进制数</p>
+<p>##模块导入及函数使用</p>
+<ul>
+<li><font color="#FF0000">模块</font> 是指一个可以交互使用，或者从另一Python 程序访问的代码段。只要导入了一个模块，就可以引用它的任何公共的函数、类或属性。模块可以通过这种方法来使用其它模块的功能。</li>
+</ul>
+<p>###方法一：<code>import 模块名</code></p>
+<ul>
+<li>用import语句导入模块，就在当前的名称空间(namespace)建立了一个到该模块的引用.这种引用必须使用全称，也就是说，当使用在被导入模块中定义的函数时，必须包含模块的名字。所以不能只使用 funcname，而应该使用 modname.funcname </li>
+</ul>
+<p>###方法二:<code>from 模块名 import 函数名</code> 或者  <code>from modname import *</code></p>
+<ul>
+<li>与第1种方法的区别：funcname 被直接导入到本地名字空间去了，所以它可以直接使用，而不需要加上模块名的限定 ,而* 表示，该模块的所有公共对象(public objects)都被导入到 当前的名称空间，也就是任何只要不是以”_”开始的东西都会被导入。 </li>
+<li>modname没有被定义，所以modname.funcname这种方式不起作用。并且，如果funcname如果已经被定义，它会被新版本（该导入模块中的版本）所替代。如果funcname被改成指向其他对象，modname不能不会觉察到。 </li>
+<li><p>建议:<br>1)如果你要经常访问模块的属性和方法，且不想一遍又一遍地敲入模块名，使用 <code>from module import</code> </p>
+<p>2)如果你想要有选择地导入某些属性和方法，而不想要其它的，使用 <code>from module import</code></p>
+<p>3)如果模块包含的属性和方法与你的某个模块同名，你必须使用<code>import module</code>来避免名字冲突</p>
+<p>4)尽量少用 from module import * ，因为判定一个特殊的函数或属性是从哪来的有些困难，并且会造成调试和重构都更困难。<br>###方法三：内建函数<code>__import__()</code> </p>
+</li>
+<li>除了前面两种使用import关键字的方法以外，我们还可以使用内建函数 <strong>import</strong>() 来导入module。两者的区别是，import 后面跟的必须是一个类型(type)，而<strong>import</strong>() 的参数是一个字符串，这个字符串可能来自配置文件，也可能是某个表达式计算结果。例如<br>mymodule = <strong>import</strong> (’module_name’) </li>
+<li>附注:<br>1)模块的内容都放在一个模块文件中，如 mymodule 的内容应该放在PYTHONPATH 目录下的一个mymodule.py中，C实现的除外<br>2)包可以将几个模块名称空间组织起来, 如A.b 就表示在包A中的一个子模块b<br>可以单独导入某一个子模块，如Python文档中给出的例子<br>import sound.effects.echo<br>这样必须使用全称对里面的对象进行引用，如<br>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)<br>还可以使用下面的语句来加载echo子模块<br>from Sound.Effects import echo<br>它在没有包前缀的情况下也可以使用， 所以它可以如下方式调用：<br>echo.echofilter(input, output, delay=0.7, atten=4)<br>不主张从一个包或模块中用import * 导入所有模块，因为这样的通常会导致可读性很差。<br>from Package import specific_submodule的用法并没有错，实际上这还是推荐的用法，除非导入的模块需要使用其它包中的同名子模块(the importing module needs to use submodules with the same name from different packages).<br>综上所述，一般情况应该使用import , 但有几个例外<br>1)module文档告诉你要用from-import的<br>2)导入一个包组件。需要一个包里面的某个子模块，一般用from A.b import c比import A.b.c 更方便 且不会冒混淆的危险.<br>###使用帮助<br><code>dir（模块名）</code>—&gt;查看模块内包含的函数</li>
+</ul>
+<p><code>help(模块名.函数名)</code>—&gt;查看函数如何使用<br>练习模块：</p>
+<p>matplotlib————&gt;绘图模块</p>
+<p>binascii——————&gt;</p>
+<p>##列表初始化</p>
+<p><code>&gt;&gt;&gt;a=[0]*20</code>——&gt;a=[0，0，0，…0，0]</p>
+
       
     </div>
 
@@ -332,17 +362,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/11/26/仿射密码/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/11/My-blog'-start/" rel="prev" title="New start!">
-                New start! <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,7 +491,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python笔记"><span class="nav-number">1.</span> <span class="nav-text">Python笔记</span></a></li></ol></div>
             
           </div>
         </section>
