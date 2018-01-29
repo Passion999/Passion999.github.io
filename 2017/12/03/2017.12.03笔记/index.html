@@ -78,16 +78,16 @@
 
 
 
-<meta name="description" content="title： Python3笔记2017.12.03base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符">
+<meta name="description" content="base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。不断进行，直到全部输入数据转换完成。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Passion999">
+<meta property="og:title" content="Python3笔记2017.12.03">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/2017.12.03笔记/index.html">
 <meta property="og:site_name" content="Passion999">
-<meta property="og:description" content="title： Python3笔记2017.12.03base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符">
-<meta property="og:updated_time" content="2018-01-29T09:36:18.591Z">
+<meta property="og:description" content="base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。不断进行，直到全部输入数据转换完成。">
+<meta property="og:updated_time" content="2018-01-29T09:38:48.475Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Passion999">
-<meta name="twitter:description" content="title： Python3笔记2017.12.03base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符">
+<meta name="twitter:title" content="Python3笔记2017.12.03">
+<meta name="twitter:description" content="base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。不断进行，直到全部输入数据转换完成。">
 
 
 
@@ -105,7 +105,7 @@
   };
 </script>
 
-  <title>  | Passion999 </title>
+  <title> Python3笔记2017.12.03 | Passion999 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -258,7 +258,7 @@
             
             
               
-                
+                Python3笔记2017.12.03
               
             
           </h1>
@@ -298,8 +298,7 @@
       
 
       
-        <hr>
-<h2 id="title：-Python3笔记2017-12-03"><a href="#title：-Python3笔记2017-12-03" class="headerlink" title="title： Python3笔记2017.12.03"></a>title： Python3笔记2017.12.03</h2><h1 id="base64加解密原理"><a href="#base64加解密原理" class="headerlink" title="base64加解密原理"></a>base64加解密原理</h1><p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。</p>
+        <h1 id="base64加解密原理"><a href="#base64加解密原理" class="headerlink" title="base64加解密原理"></a>base64加解密原理</h1><p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。</p>
 <p>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。不断进行，直到全部输入数据转换完成。</p>
 <p>如果最后剩下两个输入数据，在编码结果后加1个“=”；如果最后剩下一个输入数据，编码结果后加2个“=”；如果没有剩下任何数据，就什么都不要加，这样才可以保证资料还原的正确性。</p>
 <h2 id="现将字符串转化为二进制"><a href="#现将字符串转化为二进制" class="headerlink" title="现将字符串转化为二进制"></a>现将字符串转化为二进制</h2><p><code>for ch in&#39;ABC&#39;:
@@ -372,8 +371,8 @@ for i in range(total):
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/04/网络对抗原理2017.12.04/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/04/网络对抗原理2017.12.04/" rel="prev" title="网络对抗原理-2017.12.04">
+                网络对抗原理-2017.12.04 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -497,7 +496,7 @@ for i in range(total):
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title：-Python3笔记2017-12-03"><span class="nav-number">1.</span> <span class="nav-text">title： Python3笔记2017.12.03</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#base64加解密原理"><span class="nav-number"></span> <span class="nav-text">base64加解密原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#现将字符串转化为二进制"><span class="nav-number">1.</span> <span class="nav-text">现将字符串转化为二进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六位六位取"><span class="nav-number">2.</span> <span class="nav-text">六位六位取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换"><span class="nav-number"></span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习题目"><span class="nav-number"></span> <span class="nav-text">练习题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题——base64-CTF"><span class="nav-number">1.</span> <span class="nav-text">解题——base64 CTF</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#base64加解密原理"><span class="nav-number">1.</span> <span class="nav-text">base64加解密原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#现将字符串转化为二进制"><span class="nav-number">1.1.</span> <span class="nav-text">现将字符串转化为二进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六位六位取"><span class="nav-number">1.2.</span> <span class="nav-text">六位六位取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换"><span class="nav-number">2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习题目"><span class="nav-number">3.</span> <span class="nav-text">练习题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题——base64-CTF"><span class="nav-number">3.1.</span> <span class="nav-text">解题——base64 CTF</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
