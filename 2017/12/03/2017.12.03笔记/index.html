@@ -78,16 +78,16 @@
 
 
 
-<meta name="description" content="title： Python3笔记2017.12.03#base64加解密原理 转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的">
+<meta name="description" content="title： Python3笔记2017.12.03base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Passion999">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/2017.12.03笔记/index.html">
 <meta property="og:site_name" content="Passion999">
-<meta property="og:description" content="title： Python3笔记2017.12.03#base64加解密原理 转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的">
-<meta property="og:updated_time" content="2017-12-04T10:55:13.506Z">
+<meta property="og:description" content="title： Python3笔记2017.12.03base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符">
+<meta property="og:updated_time" content="2018-01-29T09:36:18.591Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Passion999">
-<meta name="twitter:description" content="title： Python3笔记2017.12.03#base64加解密原理 转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的">
+<meta name="twitter:description" content="title： Python3笔记2017.12.03base64加解密原理转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符">
 
 
 
@@ -299,15 +299,12 @@
 
       
         <hr>
-<h2 id="title：-Python3笔记2017-12-03"><a href="#title：-Python3笔记2017-12-03" class="headerlink" title="title： Python3笔记2017.12.03"></a>title： Python3笔记2017.12.03</h2><p>#base64加解密原理</p>
-<p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。</p>
+<h2 id="title：-Python3笔记2017-12-03"><a href="#title：-Python3笔记2017-12-03" class="headerlink" title="title： Python3笔记2017.12.03"></a>title： Python3笔记2017.12.03</h2><h1 id="base64加解密原理"><a href="#base64加解密原理" class="headerlink" title="base64加解密原理"></a>base64加解密原理</h1><p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。然后，每次取出6个bit，按照其值选择。</p>
 <p>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。不断进行，直到全部输入数据转换完成。</p>
 <p>如果最后剩下两个输入数据，在编码结果后加1个“=”；如果最后剩下一个输入数据，编码结果后加2个“=”；如果没有剩下任何数据，就什么都不要加，这样才可以保证资料还原的正确性。</p>
-<p>##现将字符串转化为二进制</p>
-<p><code>for ch in&#39;ABC&#39;:
+<h2 id="现将字符串转化为二进制"><a href="#现将字符串转化为二进制" class="headerlink" title="现将字符串转化为二进制"></a>现将字符串转化为二进制</h2><p><code>for ch in&#39;ABC&#39;:
     (bin(ord(ch))[2:]).zfill(8)</code></p>
-<p>##六位六位取</p>
-<p><code>&gt;&gt;&gt;for ch in&#39;ABC&#39;:</code><br>    <code>string+=(bin(ord(ch))[2:]).zfill(8)</code></p>
+<h2 id="六位六位取"><a href="#六位六位取" class="headerlink" title="六位六位取"></a>六位六位取</h2><p><code>&gt;&gt;&gt;for ch in&#39;ABC&#39;:</code><br>    <code>string+=(bin(ord(ch))[2:]).zfill(8)</code></p>
 <blockquote>
 <blockquote>
 <blockquote>
@@ -315,16 +312,13 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<p>#转换</p>
-<p><code>&gt;&gt;&gt;binascii.unhexlify(&#39;454647&#39;)</code></p>
+<h1 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h1><p><code>&gt;&gt;&gt;binascii.unhexlify(&#39;454647&#39;)</code></p>
 <p><code>b&#39;EFG&#39;</code></p>
 <p><code>&gt;&gt;&gt;int(&#39;a&#39;,16)</code>       16表示进制</p>
 <p><code>10</code></p>
 <p><code>binstr=&#39;454647&#39;</code><br><code>for ch in binstr:
     (bin(int(ch,16)))[2;].zfill(4)</code></p>
-<p>#练习题目</p>
-<p>##解题——<a href="http://www.jianshu.com/p/b1e1214a72cb" target="_blank" rel="external">base64 CTF</a></p>
-<p><code>flag=&#39;nctf&#39;
+<h1 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h1><h2 id="解题——base64-CTF"><a href="#解题——base64-CTF" class="headerlink" title="解题——base64 CTF"></a>解题——<a href="http://www.jianshu.com/p/b1e1214a72cb" target="_blank" rel="external">base64 CTF</a></h2><p><code>flag=&#39;nctf&#39;
 total=3**10
 import base64 as b64
 alg={&#39;0&#39;:lambda x:b64.b16decode(x),&#39;1&#39;:lambda x:b64.b32decode(x),&#39;2&#39;:lambda x:b64.b64decode(x)}
@@ -503,7 +497,7 @@ for i in range(total):
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title：-Python3笔记2017-12-03"><span class="nav-number">1.</span> <span class="nav-text">title： Python3笔记2017.12.03</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title：-Python3笔记2017-12-03"><span class="nav-number">1.</span> <span class="nav-text">title： Python3笔记2017.12.03</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#base64加解密原理"><span class="nav-number"></span> <span class="nav-text">base64加解密原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#现将字符串转化为二进制"><span class="nav-number">1.</span> <span class="nav-text">现将字符串转化为二进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六位六位取"><span class="nav-number">2.</span> <span class="nav-text">六位六位取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换"><span class="nav-number"></span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习题目"><span class="nav-number"></span> <span class="nav-text">练习题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题——base64-CTF"><span class="nav-number">1.</span> <span class="nav-text">解题——base64 CTF</span></a></li></ol></div>
             
           </div>
         </section>
